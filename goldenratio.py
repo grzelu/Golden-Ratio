@@ -95,28 +95,74 @@ def gss(f,t0, tm,delta):
 
 
 # t0, tm - punkty graniczne przedzialu, tm>t0  -> [tm;t0]
-t0 = 1
-tm = 10
+#t0 = 1
+#tm = 10
 #Delta - wymagana dokladnosc bezwzgledna, delta>0
-delta = 0.0000001
+#delta = 0.0000001
 # r - wariant algorytmu
 # r=0 -> minimum poszukiwane jest w przedziale otwartym
 # r=1 -> minumum poszukiwane jest w przedziale domknietym
-r=0
+#r=0
 #I - Maksymalna dopuszczalna liczba obliczen wartosci funkcji
-J = math.ceil(3+5*math.log((tm-t0)/delta))
+#J = math.ceil(3+5*math.log((tm-t0)/delta))
 #jesli r=0, J powinno byc troche wieksze
-if r==0:
-    J=J+15
+#if r==0:
+#    J=J+15
 
 #f - funkcja do zbadania
-f = lambda x: math.pow(x,4)+7*math.pow(x,2)-12
+#f = lambda x: math.pow(x,4)+7*math.pow(x,2)-12
 
 
 
-print "t0 = {0}; tm = {1}; r = {2}; I = {3}; delta = {4};".format(t0,tm,r,J,delta)
+#print "t0 = {0}; tm = {1}; r = {2}; I = {3}; delta = {4};".format(t0,tm,r,J,delta)
+#
+#tm, t0, q0, q_best, t_best, deltaT, j, l = gss(f,tm,t0,delta)
+#
+#print "Ekstremum funkcji: t = {0} q = {1}".format(round(t_best),round(q_best))
+#print "Ekstremum funkcji: t = {0} q = {1}".format(t_best,q_best)
 
-tm, t0, q0, q_best, t_best, deltaT, j, l = gss(f,tm,t0,delta)
 
-print "Ekstremum funkcji: t = {0} q = {1}".format(round(t_best),round(q_best))
-print "Ekstremum funkcji: t = {0} q = {1}".format(t_best,q_best)
+if __name__=="__main__":
+
+    print "Wprowadz funkcje f(x)"
+    print "Przyklad: x**4 + 7 + x**2 - 12"
+    fx = raw_input("f(x): ")
+    while True:
+        print  "Czy funkcja ma szukac ekstremum w przedziale otwartym (o) czy zamknietem (z)  ?"
+        __przedzial = raw_input('[o/z] ')
+        if (__przedzial == 'z'):
+            r=1
+            while True:
+                try:
+                    _start = float(raw_input("Podaj poczatek przedzialu: "))
+                    _stop = float(raw_input("Podaj koniec przedzialu: "))
+                    break
+
+                except ValueError:
+                    print "Zly format danych, sprobuj jeszcze raz "
+            break
+        elif(__przedzial == 'o'):
+            r = 0
+            _start = 0
+            _stop = 10
+            break
+        else:
+            print "Zly wybor "
+
+    f = lambda x: eval(fx)
+    while True:
+        try:
+            delta = float(raw_input("Podaj dokladnosc obliczen (np. 0.000001): "))
+            break
+        except ValueError:
+            print "Zly format danych, sprobuj jeszcze raz"
+
+
+    J = math.ceil(3+5*math.log((_stop-_start)/delta))
+    #print "t0 = {0}; tm = {1}; r = {2}; I = {3}; delta = {4};".format(_start, _stop, r, J, delta)
+
+    tm, t0, q0, q_best, t_best, deltaT, j, l = gss(f, tm, t0, delta)
+
+    print "Ekstremum funkcji: x = {0} y = {1}".format(round(t_best), round(q_best))
+    print "Ekstremum funkcji: x = {0} y = {1}".format(t_best, q_best)
+
