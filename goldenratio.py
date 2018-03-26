@@ -161,7 +161,7 @@ if __name__=="__main__":
     J = math.ceil(3+5*math.log((_stop-_start)/delta))
     #print "t0 = {0}; tm = {1}; r = {2}; I = {3}; delta = {4};".format(_start, _stop, r, J, delta)
 
-    tm, t0, q0, q_best, t_best, deltaT, j, l = gss(f, tm, t0, delta)
+    tm, t0, q0, q_best, t_best, deltaT, j, l = gss(f, _stop, _start, delta)
 
     print "Ekstremum funkcji: x = {0} y = {1}".format(round(t_best), round(q_best))
     print "Ekstremum funkcji: x = {0} y = {1}".format(t_best, q_best)
